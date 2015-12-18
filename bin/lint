@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Linting..."
+eslint app/ test/ server.js

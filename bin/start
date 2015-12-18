@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "outpost..."
+node ./index.js
