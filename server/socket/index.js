@@ -14,10 +14,7 @@ module.exports = {
 }
 
 function init(done){
-  console.log('init socket');
   let url = socketUrl + '?token=' + token;
-
-  console.log('url', url);
   let socket = ioClient.connect(url, socketOptions);
 
   socket.on('error', function(err) {
