@@ -1,7 +1,7 @@
 'use strict';
 
 // Load the local (git ingnored) .env file into env.process
-let dotenv = require('dotenv').load();
+let dotenv = require('dotenv').config({silent: true});
 
 let nconf = require('nconf');
 let env = process.env.NODE_ENV || 'development';
