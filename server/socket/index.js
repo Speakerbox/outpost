@@ -4,22 +4,19 @@ let ioClient = require('socket.io-client');
 let nconf = require('nconf');
 let token = nconf.get('TOKEN');
 let socketUrl = nconf.get('socket:url');
-let socketOptions = {
-  'reconnection': false,
-  'force new connection': true
-};
+let socket;
 
 module.exports = {
-  init: init
+  connect: connect,
+  disconnect: disconnect
 }
 
-function init(done){
+function connect(done){
   let url = socketUrl + '?token=' + token;
-  let socket = ioClient.connect(url, socketOptions);
+  socket = ioClient.connect(url);
 
   socket.on('error', function(err) {
     console.log(err);
-    process.exit();
   });
 
   socket.on('connect', function(socket, err) {
@@ -27,7 +24,11 @@ function init(done){
   });
 
   socket.on('disconnect', function(socket) {
-    console.log('Socket has been disconnected ');
-    process.exit();
+    console.log('Socket has been disconnected');
   });
 };
+
+function disconnect(done){
+  socket.disconnect();
+  done(socket);
+}

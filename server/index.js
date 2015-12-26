@@ -9,7 +9,7 @@ module.exports = {
 
 function init(done){
   var tasks = [
-    socket.init
+    socket.connect
   ];
   async.series(tasks, done);
 };

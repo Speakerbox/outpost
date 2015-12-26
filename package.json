@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "lint": "bin/lint",
-    "start": "bin/start"
+    "start": "bin/start",
+    "test": "./bin/test"
   },
   "dependencies": {
     "async": "^1.5.0",
@@ -13,7 +14,11 @@
     "socket.io-client": "1.3.x"
   },
   "devDependencies": { 
-    "eslint": "1.10.x"
+    "eslint": "1.10.x",
+    "chai": "3.4.x",
+    "eslint": "1.10.x",
+    "mocha": "2.3.x",
+    "socket.io": "1.3.x"
   },
   "engines": {
     "node": "4.0.0"
