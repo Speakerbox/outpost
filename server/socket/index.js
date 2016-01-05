@@ -1,6 +1,8 @@
 'use strict';
 
 let ioClient = require('socket.io-client');
+let ioStream = require('socket.io-stream');
+let stream = ioStream.createStream();
 let nconf = require('nconf');
 let token = nconf.get('TOKEN');
 let socketUrl = nconf.get('socket:url');
@@ -26,6 +28,8 @@ function connect(done){
   socket.on('disconnect', function(socket) {
     console.log('Socket has been disconnected');
   });
+
+  ioStream(socket).emit('pickup', stream);
 };
 
 function disconnect(done){
