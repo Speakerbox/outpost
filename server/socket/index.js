@@ -2,6 +2,7 @@
 
 let ioClient = require('socket.io-client');
 let ioStream = require('socket.io-stream');
+let mic = require('microphone');
 let stream = ioStream.createStream();
 let nconf = require('nconf');
 let token = nconf.get('TOKEN');
@@ -30,6 +31,8 @@ function connect(done){
   });
 
   ioStream(socket).emit('pickup', stream);
+  mic.startCapture();
+  mic.audioStream.pipe(stream);
 };
 
 function disconnect(done){

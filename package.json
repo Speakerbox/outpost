@@ -10,6 +10,7 @@
   "dependencies": {
     "async": "^1.5.0",
     "dotenv": "1.2.x",
+    "microphone": "Speakerbox/node-microphone",
     "nconf": "0.8.x",
     "socket.io-client": "1.3.x",
     "socket.io-stream": "0.9.x"
