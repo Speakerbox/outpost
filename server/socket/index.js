@@ -1,5 +1,6 @@
 'use strict';
 
+let Speaker = require('speaker');
 let ioClient = require('socket.io-client');
 let ioStream = require('socket.io-stream');
 let mic = require('microphone');
@@ -8,6 +9,11 @@ let nconf = require('nconf');
 let token = nconf.get('TOKEN');
 let socketUrl = nconf.get('socket:url');
 let socket;
+let speaker = new Speaker({
+  channels: 2,
+  bitDepth: 16,     
+  sampleRate: 44100    
+});
 
 module.exports = {
   connect: connect,
@@ -30,7 +36,11 @@ function connect(done){
     console.log('Socket has been disconnected');
   });
 
-  ioStream(socket).emit('pickup', stream);
+  ioStream(socket).emit('streamAudio', stream);
+  ioStream(socket).on('receiveAudio', function(stream){
+    stream.pipe(speaker);
+  });
+
   mic.startCapture();
   mic.audioStream.pipe(stream);
 };
