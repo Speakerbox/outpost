@@ -38,15 +38,11 @@ function connect(done){
 
   ioStream(socket).emit('streamAudio', stream);
   ioStream(socket).on('receiveAudio', function(stream){
-    console.log(stream);
     stream.pipe(speaker);
   });
 
   mic.startCapture();
-  mic.audioStream.on('data', function(data){
-    console.log(data);
-    //stream.pipe(data);
-  });
+  mic.audioStream.pipe(stream);
 };
 
 function disconnect(done){
