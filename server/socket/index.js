@@ -9,6 +9,7 @@ let nconf = require('nconf');
 let token = nconf.get('TOKEN');
 let socketUrl = nconf.get('socket:url');
 let socket;
+
 let speaker = new Speaker({
   channels: 2,
   bitDepth: 16,     
@@ -22,7 +23,15 @@ module.exports = {
 
 function connect(done){
   let url = socketUrl + '?token=' + token;
-  socket = ioClient.connect(url);
+  let socketOptions = {
+    'force new connection' : true,
+    'reconnection': true,
+    'reconnectionDelay': 2000,                  
+    'reconnectionDelayMax' : 60000,             
+    'reconnectionAttempts': 'Infinity'     
+  };
+
+  socket = ioClient.connect(url, socketOptions);
 
   socket.on('error', function(err) {
     console.log(err);
