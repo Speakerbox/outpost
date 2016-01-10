@@ -27,7 +27,8 @@ function connect(done){
     'reconnection': true,
     'reconnectionDelay': 2000,                  
     'reconnectionDelayMax' : 60000,             
-    'reconnectionAttempts': 'Infinity'     
+    'reconnectionAttempts': 'Infinity',
+    'transports': ['websocket']
   };
 
   socket = ioClient.connect(url, socketOptions);
